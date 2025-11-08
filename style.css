@@ -8,23 +8,22 @@
 .hero {
    height: 100dvh;
    width: 100%;
+   /* *الإعداد الافتراضي (للهاتف/التابلت):* أقل من 740px */
+   background-color: black; 
    background:  linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(bahaa.jpg);
-   background-size:920px 810px;
-   background-position:center;
-
-   
+   background-size: cover; 
+   background-position: center center; /* في المنتصف للهاتف */
+   background-repeat: no-repeat;
 }
 
+
+/* الأنماط القياسية */
 nav {
    display: flex;
    align-items: center;
    justify-content: space-between;
    padding-top: 10px;
-   padding-left: 10%;
-   padding-right: 10%;
    flex-wrap: wrap;
-   
-
 }
 
 .logo {
@@ -37,17 +36,12 @@ span {
 }
 nav ul li {
    list-style-type: none;
-   display: inline-block;
-   padding: 10px 10px;
 }
 nav ul li a {
    color: white;
    text-decoration: none;
    font-weight: bold;
    margin: 1px;
-
-
-   
 }
 nav ul li a:hover{
    color: #ea1538;
@@ -63,8 +57,57 @@ button {
    font-weight: bold;
    font-size: 15px;
    transition: .4s;
-   margin: 20px;
 }
 button:hover {
    transform:scale(1.2);
+}
+
+/* *Media Query للهاتف/التابلت العمودي: أقل من 740 بكسل* */
+@media screen and (max-width: 739px) {
+    nav {
+        padding: 10px 5%;
+        flex-direction: column; 
+        text-align: left; 
+        align-items: flex-start; 
+        width: 100%; 
+    }
+
+    .logo { margin: 15px 0; }
+    nav ul { display: block; width: 100%; margin: 10px 0; padding-left: 0; }
+    nav ul li { display: block; padding: 5px 0; text-align: left; }
+    nav ul li a { margin-left: 0; }
+    button { margin: 10px 0 20px 0; align-self: flex-start; width: auto; }
+}
+
+
+/* *Media Query للابتوب/التابلت الأفقي: 740 بكسل فما فوق* */
+@media screen and (min-width: 740px) {
+    /* *الـ NAV يعود أفقيًا* */
+    nav {
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+    nav ul { display: block; width: auto; }
+    nav ul li { display: inline-block; padding: 10px 10px; }
+    button { margin: 20px; align-self: auto; }
+
+    /* *الخلفية متجاوبة ومحاذية للأسفل (740px - 889px)* */
+    .hero {
+        background-size: 920px 810px; 
+        background-position:center; 
+    }
+}
+
+
+/* *Media Query لـ 890 بكسل: الخلفية متجاوبة بتناسق اللابتوب (890px فما فوق)* */
+@media screen and (min-width: 890px) {
+    .hero {
+        /* *الحل النهائي لمنع الحواف:* إبقاء 'cover' مع تحديد موضع مناسب للشاشات الكبيرة */
+        background-size:920px 810px ; 
+        background-position: center 30%; /* رفع الصورة قليلاً لتعويض الـ 'bottom' */
+        background-color: black; 
+    }
 }
